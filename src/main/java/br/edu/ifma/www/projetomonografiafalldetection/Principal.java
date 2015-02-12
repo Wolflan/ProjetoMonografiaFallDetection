@@ -7,10 +7,14 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class Principal extends Activity implements SensorEventListener{
+    //Views
+    TextView freeFall;
+    TextView impact;
 
     //Variáveis para controle do Acelerômetro
     private SensorManager sensorManager;
@@ -64,10 +68,14 @@ public class Principal extends Activity implements SensorEventListener{
         //Lower Threshold  0G (Free Fall)
         if (resultado <= 2) {
             min = true;
+            freeFall = (TextView) findViewById(R.id.freeFall);
+            freeFall.setText("Queda Livre! comprimento: " +resultado);
         }
         //Upper Threshold 3G, Impact!
         if (resultado >= 15) {
             max = true;
+            impact = (TextView) findViewById(R.id.impact);
+            impact.setText("Impacto! comprimento: " +resultado);
         }
 
         //Lower and Upper Detected!
@@ -84,7 +92,6 @@ public class Principal extends Activity implements SensorEventListener{
 
         return  false;
     }
-
 
 
     @Override
