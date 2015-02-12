@@ -85,11 +85,7 @@ public class Principal extends Activity implements SensorEventListener{
         return  false;
     }
 
-    private boolean deviceCaido(Float [] vetor) {
 
-        long t0 = System.currentTimeMillis();
-        return false;
-    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
