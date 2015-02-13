@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,10 @@ public class Principal extends Activity implements SensorEventListener{
         Float y = event.values[1];
         Float z = event.values[2];
 
+        float [] posicao = event.values;
+
+        posicaoDevice(posicao);
+
         //Determina o módulo / norma, comprimento do vetor (V³)
         Double resultado = Math.sqrt(Math.abs(x*x) + Math.abs(y*y) + Math.abs(z*z));
         gravidade = (TextView) findViewById(R.id.gravidade);
@@ -96,7 +101,31 @@ public class Principal extends Activity implements SensorEventListener{
         return  false;
     }
 
+    private boolean posicaoDevice(float [] vetor) {
+        Float x = vetor[0];
+        Float y = vetor[1];
+        Float z = vetor[2];
 
+        if (Math.abs(y) <= 2) {
+            if (z > 0) {
+                Log.i("aviso","Visor para cima");
+                return true;
+            }
+            else if (z < 0) {
+                Log.i("aviso","Visor para baixo");
+                return true;
+            }
+            else if (x > 0) {
+                Log.i("aviso","Device para esquerda");
+                return true;
+            }
+            else if (x < 0) {
+                Log.i("aviso","Device para direita");
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
