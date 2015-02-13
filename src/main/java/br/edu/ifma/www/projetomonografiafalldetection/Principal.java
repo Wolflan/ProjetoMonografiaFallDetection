@@ -55,6 +55,7 @@ public class Principal extends Activity implements SensorEventListener{
     public void onSensorChanged(SensorEvent event) {
         boolean queda = fallDetection(event);
 
+        //Ação que deve ser realizada após a detecção da queda
         if (queda)
             Toast.makeText(this,"Queda!",Toast.LENGTH_SHORT).show();
     }
@@ -66,7 +67,7 @@ public class Principal extends Activity implements SensorEventListener{
 
         float [] posicao = event.values;
 
-        posicaoDevice(posicao);
+
 
         //Determina o módulo / norma, comprimento do vetor (V³)
         Double resultado = Math.sqrt(Math.abs(x*x) + Math.abs(y*y) + Math.abs(z*z));
@@ -74,7 +75,7 @@ public class Principal extends Activity implements SensorEventListener{
         gravidade.setText("Gravidade: "+resultado);
 
         //Lower Threshold  0G (Free Fall)
-        if (resultado <= 2) {
+        if (resultado <= 1) {
             min = true;
             freeFall = (TextView) findViewById(R.id.freeFall);
             freeFall.setText("Queda Livre! comprimento: " +resultado);
@@ -90,11 +91,13 @@ public class Principal extends Activity implements SensorEventListener{
         if (min && max) {
             //Inactivity 1G
             if (resultado >= 9 && resultado <= 9.8) {
+                //Verifica se o device está em posisao de queda
+                if (posicaoDevice(posicao)) {
+                    min = false;
+                    max = false;
 
-                min = false;
-                max = false;
-
-                return true;
+                    return true;
+                }
             }
         }
 
@@ -106,21 +109,30 @@ public class Principal extends Activity implements SensorEventListener{
         Float y = vetor[1];
         Float z = vetor[2];
 
-        if (Math.abs(y) <= 2) {
+        //Deixa passar alguns segundos para verificar a posição do sensor
+        long t0 = System.currentTimeMillis();
+        while ( (System.currentTimeMillis() - t0) <= 1500 )
+            //Log.i("aviso","Tempo"+(System.currentTimeMillis() - t0));
+
+        //Device com o visor para cima ou para baixo
+        if (Math.abs(y) <= 2 && Math.abs(x) <= 2) {
             if (z > 0) {
                 Log.i("aviso","Visor para cima");
                 return true;
             }
-            else if (z < 0) {
+            else {
                 Log.i("aviso","Visor para baixo");
                 return true;
             }
-            else if (x > 0) {
-                Log.i("aviso","Device para esquerda");
+        }
+        //Device em posicao para os lados (esquerda ou direita)
+        if (Math.abs(y) <= 2 && Math.abs(z) <= 2) {
+            if (x > 0) {
+                Log.i("aviso","Device para a esquerda");
                 return true;
             }
-            else if (x < 0) {
-                Log.i("aviso","Device para direita");
+            else {
+                Log.i("aviso","Device para a direita");
                 return true;
             }
         }
