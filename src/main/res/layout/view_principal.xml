@@ -12,16 +12,25 @@
         android:orientation="vertical">
 
         <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/freeFall"
-         android:textSize="30sp"/>
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/freeFall"
+             android:textSize="30sp"
+             android:textColor="#fff4fdff" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/impact"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:textColor="#ff050101" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gravidade"
+            android:textSize="30sp"
+            android:textColor="#fffffa0d" />
 
     </LinearLayout>
 

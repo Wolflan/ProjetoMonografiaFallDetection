@@ -15,6 +15,7 @@ public class Principal extends Activity implements SensorEventListener{
     //Views
     TextView freeFall;
     TextView impact;
+    TextView gravidade;
 
     //Variáveis para controle do Acelerômetro
     private SensorManager sensorManager;
@@ -64,6 +65,8 @@ public class Principal extends Activity implements SensorEventListener{
 
         //Determina o módulo / norma, comprimento do vetor (V³)
         Double resultado = Math.sqrt(Math.abs(x*x) + Math.abs(y*y) + Math.abs(z*z));
+        gravidade = (TextView) findViewById(R.id.gravidade);
+        gravidade.setText("Gravidade: "+resultado);
 
         //Lower Threshold  0G (Free Fall)
         if (resultado <= 2) {
@@ -92,6 +95,7 @@ public class Principal extends Activity implements SensorEventListener{
 
         return  false;
     }
+
 
 
     @Override
