@@ -67,8 +67,6 @@ public class Principal extends Activity implements SensorEventListener{
 
         float [] posicao = event.values;
 
-
-
         //Determina o módulo / norma, comprimento do vetor (V³)
         Double resultado = Math.sqrt(Math.abs(x*x) + Math.abs(y*y) + Math.abs(z*z));
         gravidade = (TextView) findViewById(R.id.gravidade);
@@ -91,11 +89,10 @@ public class Principal extends Activity implements SensorEventListener{
         if (min && max) {
             //Inactivity 1G
             if (resultado >= 9 && resultado <= 9.8) {
+                min = false;
+                max = false;
                 //Verifica se o device está em posisao de queda
                 if (posicaoDevice(posicao)) {
-                    min = false;
-                    max = false;
-
                     return true;
                 }
             }
@@ -105,17 +102,20 @@ public class Principal extends Activity implements SensorEventListener{
     }
 
     private boolean posicaoDevice(float [] vetor) {
-        Float x = vetor[0];
+
         Float y = vetor[1];
         Float z = vetor[2];
 
         //Deixa passar alguns segundos para verificar a posição do sensor
-        long t0 = System.currentTimeMillis();
-        while ( (System.currentTimeMillis() - t0) <= 1500 )
-            //Log.i("aviso","Tempo"+(System.currentTimeMillis() - t0));
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //Log.i("aviso","Tempo"+(System.currentTimeMillis() - t0));
 
         //Device com o visor para cima ou para baixo
-        if (Math.abs(y) <= 2 && Math.abs(x) <= 2) {
+        if (Math.abs(y) <= 2 ) {
             if (z > 0) {
                 Log.i("aviso","Visor para cima");
                 return true;
@@ -125,17 +125,7 @@ public class Principal extends Activity implements SensorEventListener{
                 return true;
             }
         }
-        //Device em posicao para os lados (esquerda ou direita)
-        if (Math.abs(y) <= 2 && Math.abs(z) <= 2) {
-            if (x > 0) {
-                Log.i("aviso","Device para a esquerda");
-                return true;
-            }
-            else {
-                Log.i("aviso","Device para a direita");
-                return true;
-            }
-        }
+
         return false;
     }
 
