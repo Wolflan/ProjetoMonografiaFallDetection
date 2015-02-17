@@ -115,6 +115,7 @@ public class Principal extends Activity implements SensorEventListener{
         //Log.i("aviso","Tempo"+(System.currentTimeMillis() - t0));
 
         //Device com o visor para cima ou para baixo
+        //Valores muito baixos de y indicam que o dispositivo não está em pé
         if (Math.abs(y) <= 2 ) {
             if (z > 0) {
                 Log.i("aviso","Visor para cima");
