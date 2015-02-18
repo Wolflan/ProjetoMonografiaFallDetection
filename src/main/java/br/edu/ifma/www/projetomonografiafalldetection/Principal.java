@@ -22,12 +22,15 @@ public class Principal extends Activity implements SensorEventListener{
     private SensorManager sensorManager;
     private Sensor sensor;
 
+    //Usadas para inferir a queda
     private boolean min = false;
     private boolean max = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_principal);
+
         //Criando os objetos para controle do sensor
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
