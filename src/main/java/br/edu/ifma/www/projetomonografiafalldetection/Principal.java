@@ -2,6 +2,7 @@ package br.edu.ifma.www.projetomonografiafalldetection;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -30,7 +31,7 @@ public class Principal extends Activity implements SensorEventListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_principal);
-
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //Criando os objetos para controle do sensor
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
