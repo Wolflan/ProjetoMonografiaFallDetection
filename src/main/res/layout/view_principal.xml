@@ -17,6 +17,7 @@
              android:layout_height="wrap_content"
              android:id="@+id/freeFall"
              android:textSize="30sp"
+             android:textStyle="bold"
              android:textColor="#fff4fdff" />
 
         <TextView
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/impact"
             android:textSize="30sp"
+            android:textStyle="bold"
             android:textColor="#ff050101" />
 
         <TextView
@@ -31,6 +33,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/gravidade"
             android:textSize="30sp"
+            android:textStyle="bold"
             android:textColor="#fffffa0d" />
 
     </LinearLayout>
