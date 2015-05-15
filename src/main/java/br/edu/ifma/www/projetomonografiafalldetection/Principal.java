@@ -1,3 +1,4 @@
+/*Wolflan*/
 package br.edu.ifma.www.projetomonografiafalldetection;
 
 import android.app.Activity;
